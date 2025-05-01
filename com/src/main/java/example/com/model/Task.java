@@ -2,6 +2,8 @@ package example.com.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.time.LocalDateTime;
 
@@ -26,6 +28,7 @@ public class Task {
     private LocalDateTime createdAt;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 

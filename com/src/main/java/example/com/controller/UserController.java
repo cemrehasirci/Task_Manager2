@@ -16,20 +16,20 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    @PreAuthorize("hashAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hashAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
     }
 
     @PostMapping("/api/users")
-    @PreAuthorize("hashAnyRole('ADMIN')")   //BURAYI SONRA ADMIN YAP
+    @PreAuthorize("hasAnyRole('ADMIN')")   //BURAYI SONRA ADMIN YAP
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }

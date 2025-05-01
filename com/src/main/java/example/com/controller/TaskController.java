@@ -16,31 +16,31 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping
-    @PreAuthorize("hashAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hashAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Task getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id);
     }
 
     @PostMapping
-    @PreAuthorize("hashAnyRole('ADMIN')") //BURAYI SONRA ADMIN YAP
+    @PreAuthorize("hasAnyRole('ADMIN')") //BURAYI SONRA ADMIN YAP
     public Task createTask(@RequestBody CreateTaskRequest task) {
         return taskService.createTask(task);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hashAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
         return taskService.updateTask(id, updatedTask);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hashAnyRole('ADMIN')") //BURAYI SONRA ADMIN YAP
+    @PreAuthorize("hasAnyRole('ADMIN')") //BURAYI SONRA ADMIN YAP
     public void deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
     }

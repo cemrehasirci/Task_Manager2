@@ -2,6 +2,7 @@ package example.com.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Task> tasks;
 

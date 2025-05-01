@@ -16,7 +16,7 @@ public class TaskManagerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TaskManagerApplication.class, args);
 	}
-/*
+
 	@Bean
 	CommandLineRunner createAdmin(UserRepository userRepository, PasswordEncoder encoder) {
 		return args -> {
@@ -30,8 +30,18 @@ public class TaskManagerApplication {
 			} else {
 				System.out.println("ℹ️ Admin zaten var.");
 			}
+
+			if (userRepository.findByUsername("user").isEmpty()) {
+				User user = new User();
+				user.setUsername("user");
+				user.setPassword(encoder.encode("user123"));
+				user.setRole(Role.USER);
+				userRepository.save(user);
+				System.out.println("✅ User kullanıcısı eklendi: user / user123");
+			} else {
+				System.out.println("ℹ️ User zaten var.");
+			}
 		};
 	}
-	*/
 }
 
