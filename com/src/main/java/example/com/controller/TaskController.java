@@ -28,7 +28,7 @@ public class TaskController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN')") //BURAYI SONRA ADMIN YAP
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public Task createTask(@RequestBody CreateTaskRequest task) {
         return taskService.createTask(task);
     }
@@ -40,7 +40,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')") //BURAYI SONRA ADMIN YAP
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public void deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
     }
