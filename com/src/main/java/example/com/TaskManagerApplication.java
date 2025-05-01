@@ -16,7 +16,7 @@ public class TaskManagerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TaskManagerApplication.class, args);
 	}
-
+/*
 	@Bean
 	CommandLineRunner createAdmin(UserRepository userRepository, PasswordEncoder encoder) {
 		return args -> {
@@ -32,5 +32,6 @@ public class TaskManagerApplication {
 			}
 		};
 	}
+	*/
 }
 

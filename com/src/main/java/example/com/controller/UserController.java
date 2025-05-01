@@ -28,7 +28,7 @@ public class UserController {
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/api/users")
     @PreAuthorize("hashAnyRole('ADMIN')")   //BURAYI SONRA ADMIN YAP
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);

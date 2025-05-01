@@ -1,7 +1,7 @@
 package example.com.model;
 
 public enum TaskStatus {
-    PENDING,
+    TODO,
     IN_PROGRESS,
     DONE
 }
