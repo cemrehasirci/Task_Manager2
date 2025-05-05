@@ -1,11 +1,12 @@
 import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
+import { useAuth } from '../context/AuthContext';
 
 function AppNavbar() {
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
+    const { token, logout } = useAuth();
 
     let role = '';
     if (token) {
@@ -18,7 +19,7 @@ function AppNavbar() {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        logout();
         navigate('/login');
     };
 
@@ -32,10 +33,10 @@ function AppNavbar() {
                         {token ? (
                             <>
                                 <Nav.Link as={Link} to="/tasks">Görevler</Nav.Link>
-                                {role === 'ADMIN' && (
-                                    <Nav.Link as={Link} to="/tasks/new">Görev Ekle</Nav.Link>
-                                )}
-                                <Button variant="outline-light" size="sm" onClick={handleLogout} className="ms-2">Çıkış</Button>
+                                <Nav.Link as={Link} to="/users">Kullanıcılar</Nav.Link>
+                                <Button variant="outline-light" size="sm" onClick={handleLogout} className="ms-2">
+                                    Çıkış
+                                </Button>
                             </>
                         ) : (
                             <>

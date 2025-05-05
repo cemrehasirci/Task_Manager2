@@ -1,0 +1,25 @@
+/* src/components/UserInfoBox.css */
+
+.user-sidebar {
+    position: fixed;
+    left: 0;
+    top: 56px; /* Navbar yüksekliği */
+    width: 220px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    font-size: 0.9rem;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .user-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+    }
+}

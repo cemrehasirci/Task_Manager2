@@ -74,7 +74,7 @@ public class SecurityConfig {
     }
  */
 
-    // 🔥 Şifresiz doğrulama
+    // Şifresiz doğrulama
     @Bean
     public AuthenticationManager authenticationManager() {
         return authentication -> {

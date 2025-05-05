@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function LoginPage() {
     const [form, setForm] = useState({ username: '', password: '' });
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth(); // ✅ Context'ten login fonksiyonunu alıyoruz
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,17 +16,15 @@ function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form gönderildi", form); // test için ekle
         try {
             const res = await api.post('/auth/login', form);
-            localStorage.setItem('token', res.data.token);
+            login(res.data.token); // ✅ token'ı context'e yazıyoruz
             navigate('/tasks');
         } catch (err) {
             console.error('Login error:', err.response || err);
             setError(err.response?.data?.message || 'Giriş başarısız.');
         }
     };
-
 
     return (
         <Container className="mt-5" style={{ maxWidth: '400px' }}>

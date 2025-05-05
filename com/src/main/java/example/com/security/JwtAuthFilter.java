@@ -41,7 +41,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if (jwtService.isTokenValid(token, username)) {
-                // 👇 rol bilgisi userDetails'tan alınıyor
+                // rol bilgisi userDetails'tan alınıyor
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,

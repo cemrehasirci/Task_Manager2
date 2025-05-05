@@ -7,6 +7,6 @@ public class AuthUtil {
 
     public static String getCurrentUsername() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth.getName(); // Kullanıcı adı (username)
+        return auth.getName();
     }
 }
