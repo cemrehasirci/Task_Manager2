@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 Map.of(
                         "timestamp", LocalDateTime.now(),
-                        "message", ex.getMessage(),
+                        "message", safeMessage(ex.getMessage()),
                         "status", HttpStatus.NOT_FOUND.value()
                 )
         );
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(
                 Map.of(
                         "timestamp", LocalDateTime.now(),
-                        "message", ex.getMessage(),
+                        "message", safeMessage(ex.getMessage()),
                         "status", HttpStatus.CONFLICT.value()
                 )
         );
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                 Map.of(
                         "timestamp", LocalDateTime.now(),
-                        "message", ex.getMessage(),
+                        "message", safeMessage(ex.getMessage()),
                         "status", HttpStatus.INTERNAL_SERVER_ERROR.value()
                 )
         );
@@ -49,10 +49,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
                 Map.of(
                         "timestamp", LocalDateTime.now(),
-                        "message", ex.getMessage(),
+                        "message", safeMessage(ex.getMessage()),
                         "status", HttpStatus.FORBIDDEN.value()
                 )
         );
     }
 
+    private String safeMessage(String message) {
+        return message != null ? message : "Bilinmeyen hata oluştu";
+    }
 }

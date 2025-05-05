@@ -2,17 +2,16 @@ package example.com.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.Getter;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
-@Entity
 @Data
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class Task {
 
     @Id
@@ -27,56 +26,33 @@ public class Task {
 
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany
+    @JoinTable(
+            name = "task_users",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> users = new HashSet<>();
 
-    public Long getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                '}';
     }
 
-    public String getTitle() {
-        return title;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task task)) return false;
+        return Objects.equals(id, task.id);
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public TaskStatus getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setStatus(TaskStatus status) {
-        this.status = status;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    @Override
+    public int hashCode() {
+        return 31;
     }
 }

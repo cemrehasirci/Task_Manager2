@@ -9,7 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -35,7 +34,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        token = authHeader.substring(7); // "Bearer " sonrası
+        token = authHeader.substring(7); //
         username = jwtService.extractUsername(token);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -47,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,
                                 null,
-                                userDetails.getAuthorities()  // 👈 BU SATIR ESKİDE YOKSA, ROLE YOK GİBİ OLUR
+                                userDetails.getAuthorities()
                         );
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

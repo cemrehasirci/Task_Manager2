@@ -1,7 +1,7 @@
 package example.com.controller;
-
 import example.com.dto.CreateTaskRequest;
-import example.com.model.Task;
+import example.com.dto.TaskResponse;
+import example.com.dto.UpdateTaskRequest;
 import example.com.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,25 +17,25 @@ public class TaskController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public List<Task> getAllTasks() {
+    public List<TaskResponse> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public Task getTaskById(@PathVariable Long id) {
+    public TaskResponse getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id);
     }
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public Task createTask(@RequestBody CreateTaskRequest task) {
+    public TaskResponse createTask(@RequestBody CreateTaskRequest task) {
         return taskService.createTask(task);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
+    public TaskResponse updateTask(@PathVariable Long id, @RequestBody UpdateTaskRequest updatedTask) {
         return taskService.updateTask(id, updatedTask);
     }
 

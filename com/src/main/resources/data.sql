@@ -1,10 +1,21 @@
+-- Şifreler önceden BCrypt ile encode edilmiş
+/*INSERT INTO users (id, username, password, role) VALUES
+                                                     (1, 'admin', '$2a$10$VFkFlIfULC3EqPV5Kf1.FelMSXLbbYNp9hFzrcRSKk0d8LZKFuWXK', 'ADMIN'),
+                                                     (2, 'user', '$2a$10$8NKh8sDiX3Gac/O30epz9u4vlEVwX5wPZ4u8/nKMX5JuS2J.uxY2C', 'USER');
+*/
+
+
+-- admin: admin123 | user: user123
+
 -- Admin ve normal kullanıcı
 INSERT INTO users (username, password, role) VALUES
-                                                 ('admin', '$2a$10$3N9WxE6FzvLK5X7IjkmdrOOFvKylDgIuejJqJ05PQ0r0oUtpyblg2', 'ADMIN'),
-                                                 ('user', '$2a$10$KXZsG.z1VpI5BpYTuWJWleJ1vwhxKxJz8hvkpZBtIaXOsRYeFwAKK', 'USER');
--- Admin,users paswsord:123456, user123
+    ('admin', 'admin123', 'ADMIN'),
+    ('user', 'user123', 'USER');
 
 -- Görev örnekleri
-INSERT INTO tasks (title, description, status) VALUES
-                                                   ('İlk görev', 'H2 ile test', 'TODO'),
-                                                   ('İkinci görev', 'Data.sql ile geldi', 'IN_PROGRESS');
+INSERT INTO task (title, description, status, created_at) VALUES
+                                                                           ('İlk görev', 'Giriş yap', 'TODO', CURRENT_TIMESTAMP),
+                                                                           ('İkinci görev', 'Task kontrolü yap', 'IN_PROGRESS', CURRENT_TIMESTAMP);
+
+-- Kullanıcı-görev eşleşmesi (ara tabloya yazılır)
+INSERT INTO task_users (task_id, user_id) VALUES (1, 2), (2, 2);
